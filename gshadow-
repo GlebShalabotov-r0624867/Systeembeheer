@@ -50,3 +50,5 @@ postdrop:!::
 ssh:!::
 mlocate:!::
 uuidd:!::
+check:!::
+incron:!::
