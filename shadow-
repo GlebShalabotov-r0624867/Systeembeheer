@@ -26,3 +26,4 @@ sshd:*:17920:0:99999:7:::
 uuidd:*:17920:0:99999:7:::
 check:$6$WzYpAmES$fdtkswfJ3u06MngLH29gW5HAyTQmsnZ/QxQGN6t3b6vK9EW2rnkwtlu8F/Mks.mhisvuf.7MR4OPuvu2kLLlv0:18173:0:99999:7:::
 ntp:*:18206:0:99999:7:::
+bind:*:18210:0:99999:7:::
