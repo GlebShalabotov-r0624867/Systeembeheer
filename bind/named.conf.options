@@ -1,6 +1,15 @@
+//asl "trusted"{
+//	193.191.177.146; #ik
+//	193.191.176.254; #ns1
+//	193.191.177.4; #ns2
+//	#193.191.177.191; # wietse	
+//};
+//
+
 options {
 	directory "/var/cache/bind";
-
+	recursion no;
+	allow-transfer {none; };
 	// If there is a firewall between you and nameservers you want
 	// to talk to, you may need to fix the firewall to allow multiple
 	// ports to talk.  See http://www.kb.cert.org/vuls/id/800113
@@ -9,12 +18,17 @@ options {
 	// nameservers, you probably want to use them as forwarders.  
 	// Uncomment the following block, and insert the addresses replacing 
 	// the all-0's placeholder.
+	
+	//recursion yes;
+	//allow-recursion{ trusted; };
+	//listen-on {193.191.177.146; };
+	//allow-transfer { none; };
+	//forwarders {
+	// 	8.8.8.8;
+	//	8.8.4.4;
+	//};
 
-	// forwarders {
-	// 	0.0.0.0;
-	// };
-
-	//========================================================================
+	////========================================================================
 	// If BIND logs error messages about the root key being expired,
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
