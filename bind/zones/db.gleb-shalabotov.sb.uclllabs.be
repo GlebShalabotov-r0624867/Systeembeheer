@@ -3,7 +3,7 @@
 ;
 $TTL	604800
 @	IN	SOA	gleb-shalabotov.sb.uclllabs.be. root.gleb-shalabotov.sb.uclllabs.be. (
-			      5		; Serial
+			     11		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
@@ -21,4 +21,11 @@ www					IN 	A	193.191.177.146
 test					IN 	A	193.191.177.254
 www1					IN 	A	193.191.177.146
 www2					IN	A	193.191.177.146
+secure					IN	A	193.191.177.146
+supersecure				IN	A	193.191.177.146
 
+secure.gleb-shalabotov.sb.uclllabs.be. 	IN 	CAA	0 issue "letsencrypt.org"
+secure.gleb-shalabotov.sb.uclllabs.be. 	IN	CAA	0 iodef "mailto:root@gleb-shalabotov.sb.uclllabs.be"
+
+supersecure.gleb-shalabotov.sb.uclllabs.be.	IN	CAA	0 issue "letsencrypt.org"
+supersecure.gleb-shalabotov.sb.uclllabs.be.	IN	CAA	0 iodef "mailto:root@gleb-shalabotov.sb.uclllabs.be"
