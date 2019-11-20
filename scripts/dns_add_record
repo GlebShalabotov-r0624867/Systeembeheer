@@ -11,10 +11,8 @@ if [[ $1 = "-t" ]]; then
 	case $2 in 
 	A ) 
 	echo -e "$3			IN	A	$4" >> /etc/bind/zones/db."$5"
-	DB="etc/bind/zones/db.$5"
-	;;
+	
+	;;i
 	MX )
 	echo -e "@			IN	MX	10	$3.$5." >> etc/bind/zones/db."$5"
 	echo -e "$3			IN	A	$4" >> /etc/bind/zones/db."$5"
-	DB="/etc/bind/zones/db.$5"
-	;;
