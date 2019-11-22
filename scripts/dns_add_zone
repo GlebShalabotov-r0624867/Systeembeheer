@@ -1,0 +1,46 @@
+#!/bin/bash
+domain=$1
+mydate=$(date +%Y%m%d)
+
+echo "\$TTL 604800
+@	IN SOA ns.$domain.gleb-shalabotov.sb.uclllabs.be.	root.$domain.gleb-shalabotov.sb.uclllabs.be.(
+                                        $mydate"1"      ; Serial
+                                        604800          ; Refresh
+                                        600             ; Retry
+                                        2419200         ; Expire
+                                        604800 )        ; Negative Cache TTL
+;
+@			IN	NS	ns.$domain.gleb-shalabotov.sb.uclllabs.be.
+@			IN	NS	ns.gleb-shalabotov.sb.uclllabs.be.
+ns            		IN      A       193.191.177.146
+@			IN	A	193.191.177.146 " > /etc/bind/zones/db.$domain.gleb-shalabotov.sb.uclllabs.be
+
+
+
+echo "Add zone to named.conf.local."
+
+echo  "zone \"$domain.gleb-shalabotov.sb.uclllabs.be\" {
+        type master;
+	file \"/etc/bind/zones/db.$domain.gleb-shalabotov.sb.uclllabs.be\";
+        notify yes;
+};
+" >> /etc/bind/named.conf.local
+
+
+
+
+echo "Add ns record"
+
+echo "$domain			IN	NS	ns.gleb-shalabotov.sb.uclllabs.be." >>/etc/bind/zones/db.gleb-shalabotov.sb.uclllabs.be
+
+serialline=$(grep "Serial" /etc/bind/zones/db.gleb-shalabotov.sb.uclllabs.be)
+serialnumber=$(echo $serialline | cut -d \; -f 1)
+((serialnumber++))
+newserial="				$serialnumber         ; Serial script werkt"
+echo $newserial;
+sed -i "s/.*Serial.*/\t\t\t     $newserial/g" /etc/bind/zones/db.gleb-shalabotov.sb.uclllabs.be
+echo  "serial updated, restart bind"
+
+systemctl restart bind9
+
+echo "JUPLA"

@@ -1,30 +1,30 @@
 #!/bin/bash
 
-if [ "$EUID" -ne 0]
+if [ "$EUID" -ne 0 ]
 	then echo "Not runned as sudo"
 	exit 1;
 fi
 
-if [-n "$1" ]; then 
+if [ -n "$1" ]; then 
 if [[ $1 = "-t" ]]; then 
 
 	case $2 in 
 	A ) 
-	echo -e "$3			IN	A	$4" >> /etc/bind/zones/db."$5"
+	echo "$3			IN	A	$4" >> /etc/bind/zones/db."$5"
 	DB="/etc/bind/zones/db.$5"
-	;;i
+	;;
 	MX )
-	echo -e "@			IN	MX	10	$3.$5." >> etc/bind/zones/db."$5"
-	echo -e "$3			IN	A	$4" >> /etc/bind/zones/db."$5"
-	DB="etc/bind/zones/db.$5"
+	echo "@			IN	MX	10	$3.$5." >> /etc/bind/zones/db."$5"
+	echo "$3			IN	A	$4" >> /etc/bind/zones/db."$5"
+	DB="/etc/bind/zones/db.$5"
 	;;
 	CNAME )
 	DB="/etc/bind/zones/db.$4"
-	echo -e "$3			IN 	CNAME	$4." >> "$DB"
+	echo "$3			IN 	CNAME	$4." >> "$DB"
 	;;
 	esac
 	else
-	echo -e "$1			IN	A	$2" >> /etc/bind/zones/db. "$3"
+	echo "$1			IN	A	$2" >> /etc/bind/zones/db. "$3"
 	DB="/etc/bind/zones/db.$3"
 	fi
 
@@ -32,7 +32,7 @@ if [[ $1 = "-t" ]]; then
 	serialline=$(grep "Serial" "$DB")
 	serialnumber=$(echo $serialline | cut -d\; -f 1)
 	((serialnumber++))
-	newserial="$serialnumber	; Serial"
+	newserial="$serialnumber	; Serial werkt"
 	echo $newserial;
 	sed -i "s/.*Serial.*/\t\t\t	$newserial/g" "$DB"
 
@@ -40,5 +40,5 @@ if [[ $1 = "-t" ]]; then
 	systemctl restart bind9
 
 else 
-	echo -e "error: try dns_add_record -t A test 101.101.101.101 zonessss.gleb-shalabotov.sb.uclllabs.be"
+	echo "error: try dns_add_record -t A test 101.101.101.101 zonessss.gleb-shalabotov.sb.uclllabs.be"
 fi

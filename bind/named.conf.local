@@ -21,3 +21,22 @@ zone "gleb-shalabotov.sb.uclllabs.be" {
 //	type slave;
 //	masters {193.191.177.191;};
 //};
+
+zone "subzoneohh9yu.gleb-shalabotov.sb.uclllabs.be" {
+        type master;
+	file "/etc/bind/zones/db.subzoneohh9yu.gleb-shalabotov.sb.uclllabs.be";
+        notify yes;
+};
+
+zone "subzoneoulah2.gleb-shalabotov.sb.uclllabs.be" {
+        type master;
+	file "/etc/bind/zones/db.subzoneoulah2.gleb-shalabotov.sb.uclllabs.be";
+        notify yes;
+};
+
+zone "subzonenah6eo.gleb-shalabotov.sb.uclllabs.be" {
+        type master;
+	file "/etc/bind/zones/db.subzonenah6eo.gleb-shalabotov.sb.uclllabs.be";
+        notify yes;
+};
+
